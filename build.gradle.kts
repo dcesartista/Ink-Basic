@@ -1,6 +1,9 @@
-// Root build file — plugins applied per-module (no application here; this is a library repo).
+// Root build file — plugins applied per-module (no application here; this is a
+// library repo). Versions come from gradle/libs.versions.toml only: declaring
+// them here as literals too lets the two drift silently, which has bitten us.
 plugins {
-    id("com.android.library") version "8.13.0" apply false
-    id("org.jetbrains.kotlin.android") version "2.1.0" apply false
-    id("org.jetbrains.kotlin.plugin.compose") version "2.1.0" apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.compose) apply false
+    alias(libs.plugins.maven.publish) apply false
 }

@@ -1,8 +1,8 @@
 # Publishing ink-basic to Maven Central
 
-`ink-basic` publishes to Maven Central as `io.github.dcesartista:ink-basic`.
+`ink-basic` publishes to Maven Central as `com.cesartista.canvas:ink-basic`.
 This is what makes the design system **resolvable** — a consumer just adds
-`implementation("io.github.dcesartista:ink-basic:0.1.0")` and Gradle pulls it
+`implementation("com.cesartista.canvas:ink-basic:0.1.0")` and Gradle pulls it
 from `mavenCentral()` (a repo every Android build already has). No vendored
 copies, no submodules, no drift.
 
@@ -22,12 +22,26 @@ env vars in CI).
 
 1. Sign up at https://central.sonatype.com (Google/GitHub or an account).
    Use the **same email** that owns the namespace you'll claim.
-2. Register the **`io.github.dcesartista`** namespace, proving you control the
-   `dcesartista` GitHub account:
+2. Register the **`com.cesartista.canvas`** namespace. Central grants a
+   namespace only to whoever controls the matching identity — and because
+   `com.cesartista.*` is a **reverse-DNS domain** coordinate (not a code-host
+   one), the identity Central checks is the **`cesartista.com` domain**, not a
+   GitHub account:
    - https://central.sonatype.com/publishing/namespaces → *Add namespace*
-   - `io.github.dcesartista` → it will ask you to create a public repo named
-     `central-portal-io-github-dcesartista` in the dcesartista org, or use the
-     verify-file flow. Follow the portal's instructions and wait for approval.
+   - Enter `com.cesartista.canvas`. Registering the parent `com.cesartista`
+     instead also works and covers every `com.cesartista.*` child, so you never
+     have to re-verify for a future sibling artifact.
+   - The portal issues a verification code. Publish it as a **DNS `TXT` record
+     on `cesartista.com`**, then hit *Verify*. Follow whatever the portal
+     actually shows — it is the authority on the current flow — and wait for
+     approval.
+
+> **Prerequisite:** this namespace requires you to own and control DNS for
+> `cesartista.com`. If you do not, Central will not approve it; the fallback
+> that needs no domain is a code-host namespace such as
+> `io.github.<your-github-user>`, which is verified by creating a repo the
+> portal names. Changing the group later means republishing under new
+> coordinates, so settle this **before** the first release.
 
 ### 2. Create a user token
 

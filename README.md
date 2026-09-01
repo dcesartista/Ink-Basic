@@ -5,6 +5,21 @@ defined in the sibling **Palette** repo. This is the default, swappable "look" â
 not a design system lock-in; you can delete or replace it and drop in another
 palette without touching components.
 
+## Install
+
+Published to Maven Central:
+
+```kotlin
+// app/build.gradle.kts
+dependencies {
+    implementation("com.cesartista.canvas:ink-basic:0.1.0")
+}
+```
+
+Full consumption options (including the local composite-build path for offline
+or pre-release work) are in [CONSUMING.md](CONSUMING.md); release mechanics are
+in [PUBLISHING.md](PUBLISHING.md).
+
 ## Relationship to the other repos
 - **CANVAS** â€” overall agentic coding system; owns the *non-themeable* core
   correctness floor (a11y, 48dp touch, contrast).

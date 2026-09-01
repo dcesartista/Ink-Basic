@@ -6,13 +6,13 @@ Android app project as a dependency — not copied.
 
 ## Option A — Maven Central (recommended for production apps)
 
-`ink-basic` publishes to Maven Central as **`io.github.dcesartista:ink-basic`**.
+`ink-basic` publishes to Maven Central as **`com.cesartista.canvas:ink-basic`**.
 Every Android project already resolves `mavenCentral()`, so consuming is a
 single dependency line in `app/build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("io.github.dcesartista:ink-basic:0.1.0")
+    implementation("com.cesartista.canvas:ink-basic:0.1.0")
 }
 ```
 
@@ -115,9 +115,9 @@ aligned to the same BOM — override the BOM in your own build if you need a
 different one.
 
 > **Coordinate note.** The historical coordinate was `com.canvas:ink-basic`.
-> Publishing to Central uses `io.github.dcesartista:ink-basic` — Central
+> Publishing to Central uses `com.cesartista.canvas:ink-basic` — Central
 > requires the namespace you own. When consuming a **published** build use the
-> `io.github.dcesartista` coordinate; the `com.canvas` substitution is only
+> `com.cesartista.canvas` coordinate; the `com.canvas` substitution is only
 > for the local composite-build flow in Option B.
 
 ## Naming: `ink-basic` vs `android-*`

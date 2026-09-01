@@ -56,7 +56,7 @@ dependencies {
 }
 
 mavenPublishing {
-    coordinates("io.github.dcesartista", "ink-basic", "0.1.0")
+    coordinates("com.cesartista.canvas", "ink-basic", "0.1.0")
     publishToMavenCentral(
         automaticRelease = providers.gradleProperty("mavenCentralAutomaticPublishing")
             .orElse("false").get().toBoolean(),
