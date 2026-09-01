@@ -1,11 +1,12 @@
-package com.canvas.ui.default
+package com.canvas.uidefault
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.canvas.ui.default.palette.DefaultPalette
-import com.canvas.ui.default.token.SemanticTokens
+import com.canvas.uidefault.palette.DefaultPalette
+import com.canvas.uidefault.token.SemanticTokens
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.pow
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -86,12 +87,10 @@ class PaletteTest {
     private fun luminance(c: Color): Float {
         fun linear(v: Float): Float =
             if (v <= 0.03928f) v / 12.92f
-            else ((v + 0.055f) / 1.055f).pow(2.4f)
+            else ((v + 0.055f) / 1.055f).toDouble().pow(2.4).toFloat()
         val r = linear(c.red)
         val g = linear(c.green)
         val b = linear(c.blue)
         return 0.2126f * r + 0.7152f * g + 0.0722f * b
     }
 }
-
-private fun Float.pow(exp: Int): Float = Math.pow(this.toDouble(), exp.toDouble()).toFloat()

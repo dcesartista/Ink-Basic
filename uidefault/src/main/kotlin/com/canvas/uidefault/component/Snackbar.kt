@@ -1,4 +1,4 @@
-package com.canvas.ui.default.component
+package com.canvas.uidefault.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import com.canvas.ui.default.palette.LocalSemanticTokens
+import com.canvas.uidefault.palette.LocalSemanticTokens
 
 /**
  * Transient message on a raised surface (primary text pairs with

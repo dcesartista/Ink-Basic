@@ -1,4 +1,4 @@
-package com.canvas.ui.default.component
+package com.canvas.uidefault.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.canvas.ui.default.palette.LocalSemanticTokens
+import com.canvas.uidefault.palette.LocalSemanticTokens
 
 /**
  * Primary action button. Filled with the accent; text uses the matching on*

@@ -1,4 +1,4 @@
-package com.canvas.ui.default.component
+package com.canvas.uidefault.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.canvas.ui.default.palette.LocalSemanticTokens
+import com.canvas.uidefault.palette.LocalSemanticTokens
 
 /**
  * Linear progress for determinate/indeterminate work, with optional label.

@@ -1,14 +1,14 @@
-package com.canvas.ui.default.palette
+package com.canvas.uidefault.palette
 
 import androidx.compose.ui.graphics.Color
-import com.canvas.ui.default.token.ColorTokens
-import com.canvas.ui.default.token.ElevationTokens
-import com.canvas.ui.default.token.MotionTokens
-import com.canvas.ui.default.token.RadiusTokens
-import com.canvas.ui.default.token.SemanticTokens
-import com.canvas.ui.default.token.SizingTokens
-import com.canvas.ui.default.token.SpaceTokens
-import com.canvas.ui.default.token.TypeTokens
+import com.canvas.uidefault.token.ColorTokens
+import com.canvas.uidefault.token.ElevationTokens
+import com.canvas.uidefault.token.MotionTokens
+import com.canvas.uidefault.token.RadiusTokens
+import com.canvas.uidefault.token.SemanticTokens
+import com.canvas.uidefault.token.SizingTokens
+import com.canvas.uidefault.token.SpaceTokens
+import com.canvas.uidefault.token.TypeTokens
 
 /**
  * The free default "look" — hand-crafted as a coherent designed palette, not a

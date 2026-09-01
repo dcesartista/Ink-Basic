@@ -1,4 +1,4 @@
-package com.canvas.ui.default.component
+package com.canvas.uidefault.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -8,7 +8,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import com.canvas.ui.default.palette.LocalSemanticTokens
+import com.canvas.uidefault.palette.LocalSemanticTokens
 
 /**
  * Elevated content container. Uses surfaceRaised + elevation + radius; content

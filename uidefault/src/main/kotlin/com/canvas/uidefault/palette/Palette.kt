@@ -1,6 +1,6 @@
-package com.canvas.ui.default.palette
+package com.canvas.uidefault.palette
 
-import com.canvas.ui.default.token.SemanticTokens
+import com.canvas.uidefault.token.SemanticTokens
 
 /**
  * A "look" = a complete palette for each display mode (ADR-0001: strict

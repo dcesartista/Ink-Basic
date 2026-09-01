@@ -21,7 +21,7 @@ has `namespace`; add the artifact coordinate):
 
 ```kotlin
 // uidefault/build.gradle.kts
-android { namespace = "com.canvas.ui.default" }
+android { namespace = "com.canvas.uidefault" }
 
 // optional: give the library a stable coordinate for substitution
 // group = "com.canvas"; version = "0.1.0"
@@ -57,7 +57,7 @@ Wrap your app:
 
 ```kotlin
 setContent {
-    CanvasTheme { // from com.canvas.ui.default.palette
+    CanvasTheme { // from com.canvas.uidefault.palette
         AppNavHost()
     }
 }
@@ -84,6 +84,6 @@ sufficient and fully offline.
 ## Naming: `ui-default` vs `android-*`
 Per ADR-0002, components are named with the `Canvas` / `CanvasXxx` prefix but
 kept **neutral and host-agnostic** (Button, TextField, Card, … in the source, a
-generic `com.canvas.ui.default` namespace). The **Android/Compose** realization
+generic `com.canvas.uidefault` namespace). The **Android/Compose** realization
 lives here; a Flutter or RN app consumes the same Palette contract
 (agnostic) with its own implementation.

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.canvas.ui.default"
+    namespace = "com.canvas.uidefault"
     compileSdk = 36
 
     defaultConfig {
@@ -29,8 +29,8 @@ kotlin {
 }
 
 dependencies {
+    implementation(platform(libs.compose.bom))
     implementation(libs.androidx.core.ktx)
-    implementation(libs.compose.bom)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
     implementation(libs.compose.ui.tooling.preview)
@@ -43,6 +43,6 @@ dependencies {
     debugImplementation(libs.compose.ui.test.manifest)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.compose.bom)
+    androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.compose.ui.test.junit4)
 }

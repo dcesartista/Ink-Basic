@@ -1,4 +1,4 @@
-package com.canvas.ui.default.palette
+package com.canvas.uidefault.palette
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -10,7 +10,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import com.canvas.ui.default.token.SemanticTokens
+import com.canvas.uidefault.token.SemanticTokens
 
 /**
  * CompositionLocal carrying the active [SemanticTokens] for the current mode.
@@ -82,7 +82,7 @@ fun CanvasTheme(
     }
 }
 
-private fun ts(style: com.canvas.ui.default.token.TypeStyle): TextStyle = TextStyle(
+private fun ts(style: com.canvas.uidefault.token.TypeStyle): TextStyle = TextStyle(
     fontSize = style.size,
     fontWeight = FontWeight(style.weight),
     lineHeight = style.lineHeight,

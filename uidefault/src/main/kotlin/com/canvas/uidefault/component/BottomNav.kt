@@ -1,4 +1,4 @@
-package com.canvas.ui.default.component
+package com.canvas.uidefault.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import com.canvas.ui.default.palette.LocalSemanticTokens
+import com.canvas.uidefault.palette.LocalSemanticTokens
 
 /**
  * A single bottom-nav destination definition.

@@ -1,4 +1,4 @@
-package com.canvas.ui.default.token
+package com.canvas.uidefault.token
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp

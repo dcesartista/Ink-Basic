@@ -25,7 +25,7 @@ T3 semantic tokens via `LocalSemanticTokens`.
 
 ## Layout
 ```
-uidefault/src/main/kotlin/com/canvas/ui/default/
+uidefault/src/main/kotlin/com/canvas/uidefault/
 ├── token/       T3 semantic token definitions (Color, Type, Space, Radius,
 │                Elevation, Motion, Sizing) + SemanticTokens aggregate
 ├── palette/     Palette (light/dark/highContrast), DefaultPalette,

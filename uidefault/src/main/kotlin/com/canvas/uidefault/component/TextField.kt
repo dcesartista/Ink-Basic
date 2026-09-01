@@ -1,4 +1,4 @@
-package com.canvas.ui.default.component
+package com.canvas.uidefault.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,7 +10,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.canvas.ui.default.palette.LocalSemanticTokens
+import com.canvas.uidefault.palette.LocalSemanticTokens
 
 /**
  * Text input with label, placeholder, and token-wired error state so validation
@@ -55,7 +55,8 @@ fun CanvasTextField(
                 unfocusedContainerColor = t.color.bgSurface,
                 disabledContainerColor = t.color.bgSurfaceAlt,
                 disabledTextColor = t.color.textDisabled,
-                placeholderColor = t.color.textTertiary,
+                focusedPlaceholderColor = t.color.textTertiary,
+                unfocusedPlaceholderColor = t.color.textTertiary,
             ),
         )
         if (error != null) {
