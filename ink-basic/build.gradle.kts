@@ -62,7 +62,15 @@ mavenPublishing {
             .orElse("false").get().toBoolean(),
         validateDeployment = com.vanniktech.maven.publish.DeploymentValidation.VALIDATED,
     )
-    signAllPublications()
+    // GPG signing is required by Maven Central. Sign only once a key is configured
+    // (see PUBLISHING.md), so local/dry-run publishes keep working without one.
+    val hasSigningKey: Boolean =
+        providers.gradleProperty("signingInMemoryKey").orNull != null ||
+            providers.gradleProperty("signing.keyId").orNull != null ||
+            providers.gradleProperty("signing.secretKeyRingFile").orNull != null
+    if (hasSigningKey) {
+        signAllPublications()
+    }
     pom {
         name.set("ink-basic")
         description.set(

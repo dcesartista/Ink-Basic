@@ -4,9 +4,40 @@
 Compose component set + `CanvasTheme`. It is meant to be pulled into an
 Android app project as a dependency — not copied.
 
-Two supported pathways (no publishing infra required):
+## Option A — Maven Central (recommended for production apps)
 
-## Option A — Composite build via Git submodule (recommended, offline)
+`ink-basic` publishes to Maven Central as **`io.github.dcesartista:ink-basic`**.
+Every Android project already resolves `mavenCentral()`, so consuming is a
+single dependency line in `app/build.gradle.kts`:
+
+```kotlin
+dependencies {
+    implementation("io.github.dcesartista:ink-basic:0.1.0")
+}
+```
+
+No vendored source, no submodules, no drift. The theme root is the library's
+`CanvasTheme` and components come from `com.canvas.ink.basic.component`:
+
+```kotlin
+setContent {
+    CanvasTheme {  // from com.canvas.ink.basic.palette
+        AppNavHost()
+    }
+}
+```
+
+When the library updates, bump the version. See `PUBLISHING.md` for how
+releases are published to Central.
+
+### Pre-release / local
+
+Until a version reaches Central (or to iterate without publishing), consume
+the local build with `./gradlew publishToMavenLocal` then add `mavenLocal()`
+to `dependencyResolutionManagement { repositories { ... } }` (ahead of
+`google()`/`mavenCentral()`).
+
+## Option B — Composite build via Git submodule (offline, no Central needed)
 
 Add this repo as a submodule and register it as a composite build, so
 `:ink-basic` resolves from source alongside your project.
@@ -83,19 +114,11 @@ need to re-declare them to call `CanvasButton`, and your Compose versions are
 aligned to the same BOM — override the BOM in your own build if you need a
 different one.
 
-## Option B — Publish to a local/remote Maven
-
-`ink-basic/build.gradle.kts` is a standard `com.android.library`. Add a
-`maven-publish` block (or a `com.vanniktech`/`gradle-maven-publish)` plugin
-alias) to publish `com.canvas:ink-basic` to your Maven repo, then consume
-with:
-
-```kotlin
-implementation("com.canvas:ink-basic:<version>")
-```
-
-This is the path to take once you have a CI/registry. Until then, Option A is
-sufficient and fully offline.
+> **Coordinate note.** The historical coordinate was `com.canvas:ink-basic`.
+> Publishing to Central uses `io.github.dcesartista:ink-basic` — Central
+> requires the namespace you own. When consuming a **published** build use the
+> `io.github.dcesartista` coordinate; the `com.canvas` substitution is only
+> for the local composite-build flow in Option B.
 
 ## Naming: `ink-basic` vs `android-*`
 Per ADR-0002, components are named with the `Canvas` / `CanvasXxx` prefix but
