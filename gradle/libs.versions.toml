@@ -1,11 +1,12 @@
 [versions]
-agp = "8.9.0"
+agp = "8.13.0"
 kotlin = "2.1.0"
 composeBom = "2025.06.01"
 coreKtx = "1.16.0"
 lifecycle = "2.9.0"
 activityCompose = "1.10.1"
 junit = "4.13.2"
+mavenPublish = "0.37.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -16,6 +17,7 @@ compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+compose-animation-core = { group = "androidx.compose.animation", name = "animation-core" }
 androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -26,3 +28,4 @@ compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-mani
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }

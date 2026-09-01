@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -34,8 +33,9 @@ fun CanvasTabRow(
                 val selected = index == selectedIndex
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.labelMedium.copy(
-                        fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Medium,
+                    style = TextFromType(
+                        t.type.label,
+                        weight = if (selected) FontWeight.SemiBold else FontWeight.Medium,
                     ),
                     color = if (selected) t.color.accentPrimary else t.color.textSecondary,
                     textAlign = TextAlign.Center,

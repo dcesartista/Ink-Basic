@@ -1,5 +1,7 @@
 package com.canvas.ink.basic.token
 
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
@@ -43,3 +45,19 @@ data class TypeTokens(
         )
     }
 }
+
+/**
+ * The single T3 -> Compose text conversion. Both the T2 typography bridge and
+ * the `TextFromType` component helper resolve through here, so a component and
+ * a stray stock widget cannot render the same token differently.
+ */
+fun TypeStyle.toTextStyle(
+    fontSize: TextUnit? = null,
+    weight: FontWeight? = null,
+    lineHeight: TextUnit? = null,
+): TextStyle = TextStyle(
+    fontSize = fontSize ?: size,
+    fontWeight = weight ?: FontWeight(this.weight),
+    lineHeight = lineHeight ?: this.lineHeight,
+    letterSpacing = letterSpacing,
+)

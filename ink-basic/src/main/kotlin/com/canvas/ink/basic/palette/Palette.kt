@@ -26,17 +26,16 @@ data class Palette(
 
     companion object {
         /**
-         * Strict completeness is enforced by the type system: you cannot build a
-         * [SemanticTokens] without every token, nor a [Palette] without all three
-         * mode sets — the compiler rejects partial palettes. This helper exists
-         * for runtime/external (e.g. JSON-loaded) palettes; for code-built
-         * palettes the non-null types already guarantee completeness.
+         * Strict completeness (ADR-0001) is enforced by the type system:
+         * [SemanticTokens] has no optional members, and [Palette] cannot be
+         * built without all three mode sets — so a partial palette does not
+         * compile. A runtime check here would be dead code.
+         *
+         * What the compiler *cannot* check is that the values are usable —
+         * that every `on*` pair meets contrast, that no colour is accidentally
+         * transparent. That is the palette validator's job (ADR-0001), which
+         * lives in `PaletteTest` and runs in CI.
          */
-        @JvmStatic
-        fun requireComplete(p: Palette) {
-            require(p.light != null) { "palette '${p.id}' missing light set" }
-            require(p.dark != null) { "palette '${p.id}' missing dark set" }
-            require(p.highContrast != null) { "palette '${p.id}' missing highContrast set" }
-        }
+        const val CONTRACT = "ADR-0001 four-tier tokens; light + dark + highContrast"
     }
 }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -62,7 +61,7 @@ fun CanvasTextField(
         if (error != null) {
             Text(
                 text = error,
-                style = MaterialTheme.typography.bodySmall,
+                style = TextFromType(t.type.bodySmall),
                 color = t.color.error,
                 modifier = Modifier.padding(top = t.space.xxs),
             )

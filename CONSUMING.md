@@ -8,44 +8,52 @@ Two supported pathways (no publishing infra required):
 
 ## Option A — Composite build via Git submodule (recommended, offline)
 
-Add this repo as a submodule inside your project and register it as a composite
-build, so `:ink-basic` is resolved from source with your project.
+Add this repo as a submodule and register it as a composite build, so
+`:ink-basic` resolves from source alongside your project.
 
 ```bash
 # from your app repo root
 git submodule add <ink-basic-repo-url> vendor/ink-basic
 ```
 
-Then declare the export coordinate in `ink-basic/build.gradle.kts` (it already
-has `namespace`; add the artifact coordinate):
+**1. Give the library a coordinate.** Composite builds substitute by
+`group:name`, so this is required, not optional — without it Gradle has nothing
+to match against. In `ink-basic/build.gradle.kts` *inside this repo*:
 
 ```kotlin
-// ink-basic/build.gradle.kts
-android { namespace = "com.canvas.ink.basic" }
+group = "com.canvas"
+version = "0.1.0"
 
-// optional: give the library a stable coordinate for substitution
-// group = "com.canvas"; version = "0.1.0"
+android { namespace = "com.canvas.ink.basic" }
 ```
 
-In your **root** `settings.gradle.kts`:
+**2. Include the build.** In your **root** `settings.gradle.kts`:
 
 ```kotlin
 rootProject.name = "my-app"
 include(":app")
 
 includeBuild("vendor/ink-basic")
+```
 
-// Map the published coordinate to the included source module (offline).
-dependencyResolutionManagement {
+With `group` and `version` set, Gradle substitutes `com.canvas:ink-basic`
+for the included build's `:ink-basic` module automatically — no explicit
+mapping needed.
+
+**3. (Only if automatic substitution misses.)** Declare it explicitly. Note
+this belongs **inside the `includeBuild` block** — `dependencySubstitution` is
+not a member of `dependencyResolutionManagement`, and putting it there fails to
+evaluate:
+
+```kotlin
+includeBuild("vendor/ink-basic") {
     dependencySubstitution {
-        substitute(module("com.canvas:ink-basic"))
-            .using(project(":ink-basic")) // the module inside ink-basic
+        substitute(module("com.canvas:ink-basic")).using(project(":ink-basic"))
     }
 }
 ```
 
-Then in `app/build.gradle.kts` just depend on the coordinate — Gradle swaps it
-to your local source automatically:
+**4. Depend on the coordinate.** In `app/build.gradle.kts`:
 
 ```kotlin
 dependencies {
@@ -64,8 +72,16 @@ setContent {
 ```
 
 > **Module name.** The library module inside this repo is `:ink-basic`
-> (see `settings.gradle.kts`). The `substitute(...using(project(":ink-basic")))`
-> line resolves `:ink-basic` within the composite build.
+> (see `settings.gradle.kts`).
+
+### Compose dependencies come with it
+
+`ink-basic` exposes Compose types in its public API (`Modifier`, `Color`, `Dp`,
+`TextStyle`, `Easing`), so those artifacts are declared `api(...)` and the
+Compose BOM is exported as an `api(platform(...))` constraint. You do **not**
+need to re-declare them to call `CanvasButton`, and your Compose versions are
+aligned to the same BOM — override the BOM in your own build if you need a
+different one.
 
 ## Option B — Publish to a local/remote Maven
 
