@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ui-default"
-include(":uidefault")
+rootProject.name = "ink-basic"
+include(":ink-basic")

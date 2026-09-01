@@ -1,4 +1,4 @@
-# ui-default
+# ink-basic
 
 **Android / Jetpack Compose** implementation of the agnostic CANVAS UI contract
 defined in the sibling **Palette** repo. This is the default, swappable "look" —
@@ -10,7 +10,7 @@ palette without touching components.
   correctness floor (a11y, 48dp touch, contrast).
 - **Palette** — agnostic, host-neutral design contract: token levels + component
   inventory (`docs/0001-ui-token-contract.md`, `docs/0002-component-inventory.md`).
-- **ui-default** (this repo) — the concrete Compose/Android realization. Swappable.
+- **ink-basic** (this repo) — the concrete Compose/Android realization. Swappable.
 
 ## Token contract (mirrors Palette ADR-0001)
 Four tiers:
@@ -25,7 +25,7 @@ T3 semantic tokens via `LocalSemanticTokens`.
 
 ## Layout
 ```
-uidefault/src/main/kotlin/com/canvas/uidefault/
+ink-basic/src/main/kotlin/com/canvas/ink/basic/
 ├── token/       T3 semantic token definitions (Color, Type, Space, Radius,
 │                Elevation, Motion, Sizing) + SemanticTokens aggregate
 ├── palette/     Palette (light/dark/highContrast), DefaultPalette,
