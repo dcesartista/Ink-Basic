@@ -16,8 +16,9 @@ import androidx.compose.ui.text.font.FontWeight
 import com.canvas.ui.default.palette.LocalSemanticTokens
 
 /**
- * Transient message. Uses inverse text on a raised surface so it reads in any
- * theme. (Animate in/out with motion.duration tokens in the host).
+ * Transient message on a raised surface (primary text pairs with
+ * bgSurfaceRaised in every mode). (Animate in/out with motion.duration tokens
+ * in the host).
  */
 @Composable
 fun CanvasSnackbar(
@@ -42,7 +43,7 @@ fun CanvasSnackbar(
                 text = message,
                 modifier = Modifier.weight(1f),
                 style = TextFromType(t.type.body),
-                color = t.color.textInverse,
+                color = t.color.textPrimary,
             )
             if (actionLabel != null && onAction != null) {
                 Spacer(Modifier.width(t.space.md))
