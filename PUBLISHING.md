@@ -84,9 +84,28 @@ var, plus the key password:
 
 ```properties
 signingInMemoryKey=<ascii-armored-private-key-with-\n>
-signingInMemoryKeyId=<KEY_ID>
+signingInMemoryKeyId=<SHORT_KEY_ID>
 signingInMemoryKeyPassword=<gpg-passphrase>
 ```
+
+> **Use the SHORT (8-hex) key id here** — the last 8 characters of the long id.
+> Gradle's in-memory signing looks the key up by short id; giving it the 16-hex
+> long form fails with a misleading `Could not read PGP secret key`, which reads
+> like a corrupt key but is really "no key matched that id". Omitting the
+> property entirely also works when the keyring holds a single key.
+>
+> Two things that are **not** problems, despite looking like them: the value
+> must keep its `-----BEGIN PGP PRIVATE KEY BLOCK-----` / `-----END ...` lines,
+> and the `\n\n` after the header is correct — the blank line separating armor
+> headers from the payload is part of the format.
+>
+> Verify signing before you go near Central:
+>
+> ```bash
+> ./gradlew clean :ink-basic:publishToMavenLocal
+> ls ~/.m2/repository/com/cesartista/canvas/ink-basic/0.1.0/*.asc   # expect 5
+> gpg --verify <file>.asc <file>                                    # "Good signature"
+> ```
 
 > The build signs **only when** one of `signingInMemoryKey`, `signing.keyId`,
 > or `signing.secretKeyRingFile` is present, so `publishToMavenLocal` still
