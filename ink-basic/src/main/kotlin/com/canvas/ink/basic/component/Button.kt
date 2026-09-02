@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -42,7 +41,7 @@ fun CanvasButton(
     ) {
         androidx.compose.material3.Text(
             text = text,
-            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
+            style = TextFromType(t.type.label, weight = FontWeight.SemiBold),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
@@ -68,14 +67,16 @@ fun CanvasButtonSecondary(
         contentPadding = PaddingValues(horizontal = t.space.md, vertical = t.space.sm),
         border = BorderStroke(1.dp, t.color.outline),
         colors = ButtonDefaults.outlinedButtonColors(
+            containerColor = t.color.bgSurface,
             contentColor = t.color.textPrimary,
+            disabledContainerColor = t.color.bgSurfaceAlt,
             disabledContentColor = t.color.textDisabled,
         ),
         shape = RoundedCornerShape(t.radius.md),
     ) {
         androidx.compose.material3.Text(
             text = text,
-            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Medium),
+            style = TextFromType(t.type.label, weight = FontWeight.Medium),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )

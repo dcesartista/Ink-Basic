@@ -14,8 +14,23 @@ import org.junit.Test
 /**
  * Pure-JVM validation of the palette layer (ADR-0001: strict completeness +
  * the shared on* contrast contract). No instrumentation needed.
+ *
+ * Every mode is checked against every contrast pair the contract defines — a
+ * partial check is what let a malformed `error` color ship with alpha 0.
  */
 class PaletteTest {
+
+    /** WCAG 2.2 AA: normal-size text needs 4.5:1 (QUALITY-BAR §5). */
+    private val textMinimum = 4.5f
+
+    /** WCAG 2.2 AA 1.4.11: UI-component boundaries need 3:1. */
+    private val nonTextMinimum = 3.0f
+
+    private val modes: List<Pair<String, SemanticTokens>> = listOf(
+        "light" to DefaultPalette.instance.light,
+        "dark" to DefaultPalette.instance.dark,
+        "highContrast" to DefaultPalette.instance.highContrast,
+    )
 
     @Test
     fun resolvePicksCorrectModeSet() {
@@ -26,54 +41,126 @@ class PaletteTest {
         assertEquals(p.highContrast, p.resolve(darkTheme = false, highContrast = true))
     }
 
+    /**
+     * The shared on* contract (ADR-0001): every accent/state color ships a
+     * contrast pair, and the pair must hold in EVERY mode — not just the one
+     * that happens to be checked.
+     */
     @Test
-    fun paletteIsCompletePerMode() {
-        listOf(
-            DefaultPalette.instance.light,
-            DefaultPalette.instance.dark,
-            DefaultPalette.instance.highContrast,
-        ).forEach { t ->
-            assertCompleteness(t)
-        }
-    }
-
-    @Test
-    fun accentContrastPairsMeetWcag() {
-        val p = DefaultPalette.instance
-        listOf(
-            Triple(p.light.color.accentPrimary, p.light.color.accentOnPrimary, "light"),
-            Triple(p.dark.color.accentPrimary, p.dark.color.accentOnPrimary, "dark"),
-            Triple(p.highContrast.color.accentPrimary, p.highContrast.color.accentOnPrimary, "hc"),
-        ).forEach { (fg, bg, mode) ->
-            assertTrue(
-                "accent pair fails contrast in $mode",
-                contrastRatio(fg, bg) >= 4.5f,
+    fun everyOnPairMeetsWcagInEveryMode() {
+        modes.forEach { (mode, t) ->
+            val pairs = listOf(
+                "accentPrimary/accentOnPrimary" to (t.color.accentPrimary to t.color.accentOnPrimary),
+                "accentSecondary/accentOnSecondary" to (t.color.accentSecondary to t.color.accentOnSecondary),
+                "error/onError" to (t.color.error to t.color.onError),
+                "warning/onWarning" to (t.color.warning to t.color.onWarning),
+                "success/onSuccess" to (t.color.success to t.color.onSuccess),
+                "info/onInfo" to (t.color.info to t.color.onInfo),
             )
-        }
-    }
-
-    @Test
-    fun textOnSurfaceMeetsWcag() {
-        val p = DefaultPalette.instance
-        p.also { pt ->
-            listOf(pt.light, pt.dark, pt.highContrast).forEach { t ->
-                assertTrue(
-                    "primary text fails contrast",
-                    contrastRatio(t.color.textPrimary, t.color.bgSurface) >= 4.5f,
-                )
+            pairs.forEach { (name, pair) ->
+                val (bg, fg) = pair
+                assertContrast("$mode: $name", fg, bg, textMinimum)
             }
         }
     }
 
-    private fun assertCompleteness(t: SemanticTokens) {
-        // Presence of every color field (compiler already enforces exactness;
-        // here we assert the trusted values are distinct/non-null in practice).
-        assertTrue(t.color.accentPrimary != t.color.bgSurface)
-        assertTrue(t.color.textPrimary != t.color.textSecondary)
-        assertTrue(t.radius.sm <= t.radius.md)
-        assertTrue(t.radius.md <= t.radius.lg)
-        assertTrue(t.elevation.sm <= t.elevation.md)
-        assertTrue(t.sizing.touchTarget >= 48.dp) // 48dp minimum touch target (QUALITY-BAR)
+    /**
+     * Body text must be legible on every surface it can land on. textTertiary
+     * is spec'd as "muted / placeholder" — placeholder text is still text, so
+     * it carries the full 4.5:1 floor. textDisabled is exempt (WCAG 1.4.3
+     * excludes inactive controls).
+     */
+    @Test
+    fun bodyTextMeetsWcagOnEverySurface() {
+        modes.forEach { (mode, t) ->
+            val texts = listOf(
+                "textPrimary" to t.color.textPrimary,
+                "textSecondary" to t.color.textSecondary,
+                "textTertiary" to t.color.textTertiary,
+            )
+            val surfaces = listOf(
+                "bgSurface" to t.color.bgSurface,
+                "bgSurfaceAlt" to t.color.bgSurfaceAlt,
+                "bgSurfaceRaised" to t.color.bgSurfaceRaised,
+            )
+            texts.forEach { (tName, fg) ->
+                surfaces.forEach { (sName, bg) ->
+                    assertContrast("$mode: $tName on $sName", fg, bg, textMinimum)
+                }
+            }
+        }
+    }
+
+    /** Outlines bound interactive components (TextField, outlined Button). */
+    @Test
+    fun outlineMeetsNonTextContrast() {
+        modes.forEach { (mode, t) ->
+            assertContrast("$mode: outline on bgSurface", t.color.outline, t.color.bgSurface, nonTextMinimum)
+        }
+    }
+
+    /** Every color token must be fully opaque — a malformed ARGB literal
+     *  (e.g. `Color(0xFFC00)`) silently yields alpha 0 and renders nothing.
+     *  `overlay` is the one intentional exception: it is a scrim. */
+    @Test
+    fun everyColorTokenIsOpaque() {
+        modes.forEach { (mode, t) ->
+            val c = t.color
+            listOf(
+                "bgSurface" to c.bgSurface, "bgSurfaceAlt" to c.bgSurfaceAlt,
+                "bgSurfaceRaised" to c.bgSurfaceRaised, "textPrimary" to c.textPrimary,
+                "textSecondary" to c.textSecondary, "textTertiary" to c.textTertiary,
+                "textDisabled" to c.textDisabled, "textInverse" to c.textInverse,
+                "accentPrimary" to c.accentPrimary, "accentOnPrimary" to c.accentOnPrimary,
+                "accentSecondary" to c.accentSecondary, "accentOnSecondary" to c.accentOnSecondary,
+                "error" to c.error, "onError" to c.onError,
+                "warning" to c.warning, "onWarning" to c.onWarning,
+                "success" to c.success, "onSuccess" to c.onSuccess,
+                "info" to c.info, "onInfo" to c.onInfo,
+                "outline" to c.outline, "divider" to c.divider,
+            ).forEach { (name, color) ->
+                assertEquals("$mode: $name is not opaque (malformed ARGB literal?)", 1f, color.alpha, 0.001f)
+            }
+        }
+    }
+
+    /**
+     * Scale ordering per mode. Field completeness is already guaranteed by the
+     * compiler (SemanticTokens has no optional members and no defaults), so
+     * this asserts the orderings the type system cannot.
+     */
+    @Test
+    fun scalesAreMonotonicPerMode() {
+        modes.forEach { (mode, t) ->
+            assertTrue("$mode radius", t.radius.none <= t.radius.sm)
+            assertTrue("$mode radius", t.radius.sm <= t.radius.md)
+            assertTrue("$mode radius", t.radius.md <= t.radius.lg)
+            assertTrue("$mode radius", t.radius.lg <= t.radius.pill)
+            assertTrue("$mode elevation", t.elevation.flat <= t.elevation.sm)
+            assertTrue("$mode elevation", t.elevation.sm <= t.elevation.md)
+            assertTrue("$mode elevation", t.elevation.md <= t.elevation.lg)
+            assertTrue("$mode space", t.space.xxs <= t.space.xs)
+            assertTrue("$mode space", t.space.xs <= t.space.sm)
+            assertTrue("$mode space", t.space.sm <= t.space.md)
+            assertTrue("$mode space", t.space.md <= t.space.lg)
+            assertTrue("$mode space", t.space.lg <= t.space.xl)
+            assertTrue("$mode space", t.space.xl <= t.space.xxl)
+            assertTrue("$mode type", t.type.caption.size.value <= t.type.body.size.value)
+            assertTrue("$mode type", t.type.body.size.value <= t.type.h1.size.value)
+            assertTrue("$mode type", t.type.h1.size.value <= t.type.display.size.value)
+            assertTrue("$mode motion", t.motion.durationFast <= t.motion.durationNormal)
+            assertTrue("$mode motion", t.motion.durationNormal <= t.motion.durationSlow)
+            // 48dp minimum touch target is core-pinned, not themeable (QUALITY-BAR §5).
+            assertTrue("$mode touchTarget", t.sizing.touchTarget >= 48.dp)
+        }
+    }
+
+    private fun assertContrast(label: String, fg: Color, bg: Color, minimum: Float) {
+        val ratio = contrastRatio(fg, bg)
+        assertTrue(
+            "$label contrast %.2f:1 is below the %.1f:1 floor".format(ratio, minimum),
+            ratio >= minimum,
+        )
     }
 
     private fun contrastRatio(a: Color, b: Color): Float {
@@ -88,9 +175,6 @@ class PaletteTest {
         fun linear(v: Float): Float =
             if (v <= 0.03928f) v / 12.92f
             else ((v + 0.055f) / 1.055f).toDouble().pow(2.4).toFloat()
-        val r = linear(c.red)
-        val g = linear(c.green)
-        val b = linear(c.blue)
-        return 0.2126f * r + 0.7152f * g + 0.0722f * b
+        return 0.2126f * linear(c.red) + 0.7152f * linear(c.green) + 0.0722f * linear(c.blue)
     }
 }

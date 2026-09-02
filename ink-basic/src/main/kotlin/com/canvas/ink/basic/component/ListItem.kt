@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,11 +42,11 @@ fun CanvasListItem(
             Spacer(Modifier.width(t.space.md))
         }
         Column(Modifier.weight(1f)) {
-            Text(title, style = MaterialTheme.typography.bodyLarge, color = t.color.textPrimary)
+            Text(title, style = TextFromType(t.type.body), color = t.color.textPrimary)
             if (supportingText != null) {
                 Text(
                     supportingText,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = TextFromType(t.type.bodySmall),
                     color = t.color.textSecondary,
                 )
             }

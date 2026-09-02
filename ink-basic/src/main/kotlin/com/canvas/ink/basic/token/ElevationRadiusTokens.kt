@@ -3,7 +3,7 @@ package com.canvas.ink.basic.token
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-/** T3 radius tokens — steps 0/2/4/8/12/16/999 (pill). */
+/** T3 radius tokens — one step per token: 0/4/8/12/999 (pill) (ADR-0001). */
 data class RadiusTokens(
     val none: Dp = 0.dp,
     val sm: Dp = 4.dp,

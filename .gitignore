@@ -9,3 +9,6 @@
 .cxx
 *.apk
 *.aab
+
+# Kotlin incremental-compilation cache
+.kotlin/

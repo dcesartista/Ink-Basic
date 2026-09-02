@@ -3,7 +3,7 @@ package com.canvas.ink.basic.token
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-/** T3 spacing tokens — base 4-unit scale: 0/4/8/12/16/24/32/48/64. */
+/** T3 spacing tokens — 4-unit scale, seven steps: 4/8/12/16/24/32/48 (ADR-0001). */
 data class SpaceTokens(
     val xxs: Dp = 4.dp,
     val xs: Dp = 8.dp,
