@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.canvas.ink.basic.palette.LocalSemanticTokens
@@ -36,15 +37,29 @@ fun CanvasProgress(
             }
             Spacer(Modifier.height(t.space.xxs))
         }
-        LinearProgressIndicator(
-            progress = { progress ?: Float.NaN },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(t.sizing.progressThickness),
-            color = t.color.accentPrimary,
-            trackColor = t.color.bgSurfaceAlt,
-            strokeCap = androidx.compose.ui.graphics.StrokeCap.Round,
-            gapSize = 0.dp,
-        )
+        val bar = Modifier
+            .fillMaxWidth()
+            .height(t.sizing.progressThickness)
+        // Indeterminate and determinate are DIFFERENT overloads. Passing
+        // Float.NaN to the determinate one throws "current must not be NaN" on
+        // composition, so a default CanvasProgress() call crashed the app.
+        if (progress == null) {
+            LinearProgressIndicator(
+                modifier = bar,
+                color = t.color.accentPrimary,
+                trackColor = t.color.bgSurfaceAlt,
+                strokeCap = StrokeCap.Round,
+                gapSize = 0.dp,
+            )
+        } else {
+            LinearProgressIndicator(
+                progress = { progress.coerceIn(0f, 1f) },
+                modifier = bar,
+                color = t.color.accentPrimary,
+                trackColor = t.color.bgSurfaceAlt,
+                strokeCap = StrokeCap.Round,
+                gapSize = 0.dp,
+            )
+        }
     }
 }
