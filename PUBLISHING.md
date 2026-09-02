@@ -18,6 +18,13 @@ The following credentials/signing are read from Gradle properties or env vars,
 **never committed**. Put them in `~/.gradle/gradle.properties` (or export as
 env vars in CI).
 
+> ⚠️ **`~/.gradle/gradle.properties`, not the one in this repo.** The repo has
+> its own `gradle.properties` holding build settings, and it is **tracked by
+> git** — same filename, different directory. Credentials pasted into the repo
+> copy are one `git commit` away from being published. If that happens, treat
+> it as an exposure and **rotate** (revoke the Central token, regenerate the
+> GPG key); deleting the line is not sufficient once it is in history.
+
 ### 1. Create a Central Portal account + namespace
 
 1. Sign up at https://central.sonatype.com (Google/GitHub or an account).
