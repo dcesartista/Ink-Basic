@@ -21,6 +21,15 @@ android {
     buildFeatures {
         compose = true
     }
+
+    // Compose behaviour is verified on the JVM via Robolectric rather than on a device.
+    // Keeps the whole suite runnable with `test` — no emulator, no CI device matrix — which
+    // is the property PaletteTest already relied on.
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 kotlin {
@@ -33,7 +42,7 @@ kotlin {
 // can includeBuild() this checkout and substitute(module("com.cesartista.canvas:ink-basic"))
 // against source (local dev) without changing its dependency line.
 group = "com.cesartista.canvas"
-version = "0.1.0"
+version = "0.2.0-dev03"
 
 dependencies {
     // `api` for everything this library exposes in its public signatures —
@@ -57,6 +66,9 @@ dependencies {
     debugImplementation(libs.compose.ui.test.manifest)
 
     testImplementation(libs.junit)
+    testImplementation(libs.robolectric)
+    testImplementation(platform(libs.compose.bom))
+    testImplementation(libs.compose.ui.test.junit4)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.compose.ui.test.junit4)
 }
