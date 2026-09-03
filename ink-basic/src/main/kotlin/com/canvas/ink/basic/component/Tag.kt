@@ -12,8 +12,8 @@ import androidx.compose.ui.text.font.FontWeight
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Small read-only status label. /
- * . Non-interactive informational capsule.
+ * Small read-only status label. Non-interactive informational capsule. Tintable
+ * via [containerColor]/[contentColor].
  */
 @Composable
 fun CanvasTag(

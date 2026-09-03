@@ -13,8 +13,8 @@ import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
  * Date picker dialog driven by the M3 calendar, token-wired through the
- * CanvasTheme T2 bridge. . Hoistable via
- * [initialTimestampMillis] / selected timestamp through [onDateSelected].
+ * CanvasTheme T2 bridge. Hoistable via [initialTimestampMillis] / selected
+ * timestamp through [onDateSelected].
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

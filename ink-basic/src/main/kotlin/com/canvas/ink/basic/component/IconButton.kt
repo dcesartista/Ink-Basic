@@ -12,7 +12,7 @@ import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
  * Icon-only action button. Touch target pinned to size.touchTarget (core
- * correctness, ADR-0001). .
+ * correctness, ADR-0001).
  */
 @Composable
 fun CanvasIconButton(

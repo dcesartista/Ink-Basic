@@ -18,12 +18,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
-/** Chip visual variant —  styles. */
+/** Chip visual variant. */
 enum class CanvasChipStyle { Fill, Outline, Duotone }
 
 /**
- * Compact selectable/filter chip.  (fill/outline/
- * duotone styles).
+ * Compact selectable/filter chip (fill/outline/duotone styles).
  */
 @Composable
 fun CanvasChip(

@@ -48,8 +48,8 @@ ink-basic/src/main/kotlin/com/canvas/ink/basic/
 └── component/   T3 tokens only — CanvasButton, CanvasButtonSecondary,
                  CanvasCard, CanvasTextField, CanvasListItem, CanvasTopBar,
                  CanvasBottomNav, CanvasTabRow, CanvasEmptyState,
-                 CanvasErrorState, CanvasSnackbar, CanvasProgress, and the
-                 reconciled set: CanvasAvatar, CanvasBadge,
+                 CanvasErrorState,                  CanvasSnackbar, CanvasProgress, and the extended set:
+                 CanvasAvatar, CanvasBadge,
                  CanvasIconButton, CanvasFAB, CanvasCheckbox, CanvasToggle,
                  CanvasRadioButton, CanvasChip, CanvasTag, CanvasTooltip,
                  CanvasDivider, CanvasSearchBar, CanvasSelect, CanvasSlider,
@@ -58,11 +58,10 @@ ink-basic/src/main/kotlin/com/canvas/ink/basic/
 ```
 
 ### Notes
-- **Spacing scale** is reconciled with : the seven canonical steps
-  (4/8/12/16/24/32/48) plus extended sub-steps (2/6/20/40/80) absorbed from the
-  reference scale (`SpaceTokens`).
-- **Text scale** (10 styles, `TypeTokens`) is the richer ink-basic scale; it
-  a superset of the 6-size scale (see ADR-0001 Type).
+- **Spacing scale**: the seven canonical steps (4/8/12/16/24/32/48) plus
+  extended sub-steps (2/6/20/40/80) (`SpaceTokens`).
+- **Text scale** (10 styles, `TypeTokens`) is the richer ink-basic scale (see
+  ADR-0001 Type).
 - **Border tokens** (`border.thin=1/medium=2/thick=4`) are specified in ADR-0001
   and enforced by `PaletteTest`.
 

@@ -16,9 +16,9 @@ import androidx.compose.ui.text.font.FontWeight
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Transient message banner. . Raised surface with
- * primary text and optional action. (Animate with motion.duration in the host;
- * a SnackbarHost wrapper can manage show/dismiss.)
+ * Transient message banner on a raised surface with primary text and an
+ * optional action. (Animate with motion.duration in the host; a SnackbarHost
+ * wrapper can manage show/dismiss.)
  */
 @Composable
 fun CanvasToast(

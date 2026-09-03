@@ -6,8 +6,8 @@ import androidx.compose.ui.unit.dp
 /**
  * T3 spacing tokens — 4-unit base scale. The seven canonical steps (4/8/12/16/
  * 24/32/48) are the contract (ADR-0001). The extended sub-steps (2/6/20/40/80)
- * are rounding out the base scale for components that need
- * finer or larger granularity without breaking the base scale.
+ * round the scale out for components that need finer or larger granularity
+ * without breaking the base scale.
  */
 data class SpaceTokens(
     val xxs: Dp = 4.dp,

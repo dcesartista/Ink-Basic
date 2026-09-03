@@ -17,8 +17,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Large app bar with a headline title and optional supporting line. Mirrors
- *   large variant (h1/h2 headline on surface).
+ * Large app bar with a headline title and optional supporting line (a headline
+ * on a surface, distinct from the standard [CanvasTopBar]).
  */
 @Composable
 fun CanvasAppBarLarge(

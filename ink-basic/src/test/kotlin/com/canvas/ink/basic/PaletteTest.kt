@@ -100,26 +100,25 @@ class PaletteTest {
     }
 
     /**
-     * Spacing scale kept on the 8-point grid (8-point grid
-     * plus the extended sub-steps absorbed from that scale). Locks the exact
-     * contract values so a later palette cannot silently drift them.
+     * Spacing scale contract (8-point grid plus the extended sub-steps). Locks
+     * the exact contract values so a later palette cannot silently drift them.
      */
     @Test
-    fun spacingMatchesReconciledPixelScale() {
+    fun spacingMatchesReconciledScale() {
         modes.forEach { (mode, t) ->
             val s = t.space
             assertEquals("$mode: xxxs", 2.dp, s.xxxs)
             assertEquals("$mode: xxs", 4.dp, s.xxs)
-            assertEquals("$mode: xxs2 ", 6.dp, s.xxs2)
+            assertEquals("$mode: xxs2", 6.dp, s.xxs2)
             assertEquals("$mode: xs", 8.dp, s.xs)
             assertEquals("$mode: sm", 12.dp, s.sm)
             assertEquals("$mode: md", 16.dp, s.md)
-            assertEquals("$mode: sm2 ", 20.dp, s.sm2)
+            assertEquals("$mode: sm2", 20.dp, s.sm2)
             assertEquals("$mode: lg", 24.dp, s.lg)
             assertEquals("$mode: xl", 32.dp, s.xl)
-            assertEquals("$mode: xxxl ", 40.dp, s.xxxl)
+            assertEquals("$mode: xxxl", 40.dp, s.xxxl)
             assertEquals("$mode: xxl", 48.dp, s.xxl)
-            assertEquals("$mode: xxxxl ", 80.dp, s.xxxxl)
+            assertEquals("$mode: xxxxl", 80.dp, s.xxxxl)
         }
     }
 
@@ -169,7 +168,7 @@ class PaletteTest {
             assertTrue("$mode space", t.space.md <= t.space.lg)
             assertTrue("$mode space", t.space.lg <= t.space.xl)
             assertTrue("$mode space", t.space.xl <= t.space.xxl)
-            // Extended reconciled sub-steps keep the scale strict:
+            // Extended sub-steps keep the scale strict:
             // 2 <= 4 <= 6 <= 8 and 20 <= 24 <= 32 <= 40 <= 48 <= 80.
             assertTrue("$mode space", t.space.xxxs <= t.space.xxs)
             assertTrue("$mode space", t.space.xxs <= t.space.xxs2)

@@ -26,9 +26,9 @@ private fun avatarColorFromSeed(seed: String, palette: List<Color>): Color {
 }
 
 /**
- * Display image/icon/text in a circle. .
- * The image overload takes a [Painter] (from a resource/Coil `rememberAsyncImagePainter`);
- * the icon/initials overloads cover the common cases.
+ * Display image/icon/text in a circle. The image overload takes a [Painter]
+ * (from a resource/Coil `rememberAsyncImagePainter`); the icon/initials
+ * overloads cover the common cases.
  */
 @Composable
 fun CanvasAvatar(

@@ -11,8 +11,8 @@ import androidx.compose.ui.unit.dp
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Selection checkbox with a label.  (which has
- * size/state/style). Tri-state via [state] null for indeterminate.
+ * Selection checkbox with a label. Tri-state via [checked] null for
+ * indeterminate, with [size] and [enabled] variants.
  */
 @Composable
 fun CanvasCheckbox(

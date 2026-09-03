@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Single-value slider. . Optional [label] and
- * [valueLabel] (e.g. "30%") rendered above the track.
+ * Single-value slider. Optional [label] and [valueLabel] (e.g. "30%") rendered
+ * above the track.
  */
 @Composable
 fun CanvasSlider(

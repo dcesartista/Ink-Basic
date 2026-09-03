@@ -6,10 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 /**
- * Pull-to-refresh container. . Wraps
- * [content] in a scrollable surface that triggers [onRefresh] on overscroll
- * while [isRefreshing]. Uses the default indicator, which is already token-wired
- * to the accent color via the CanvasTheme T2 bridge (M3 `primary`).
+ * Pull-to-refresh container. Wraps [content] in a scrollable surface that
+ * triggers [onRefresh] on overscroll while [isRefreshing]. Uses the default
+ * indicator, which is already token-wired
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

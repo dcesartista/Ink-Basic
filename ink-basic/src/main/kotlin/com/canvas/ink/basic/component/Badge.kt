@@ -14,9 +14,9 @@ import androidx.compose.ui.text.font.FontWeight
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Small status/count/notification badge. .
- * Renders a filled accent capsule; content set via the trailing lambda or the
- * [label]/[count] convenience overloads.
+ * Small status/count/notification badge. Renders a filled accent capsule;
+ * content set via the trailing lambda or the [label]/[count] convenience
+ * overloads.
  */
 @Composable
 fun CanvasBadge(

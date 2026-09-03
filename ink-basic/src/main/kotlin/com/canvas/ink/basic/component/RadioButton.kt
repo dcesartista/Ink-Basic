@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Single-select radio option. .
+ * Single-select radio option.
  */
 @Composable
 fun CanvasRadioButton(

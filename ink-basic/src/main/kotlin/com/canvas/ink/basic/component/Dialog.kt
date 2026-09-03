@@ -21,10 +21,9 @@ import androidx.compose.ui.window.DialogProperties
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Modal dialog / alert. .
- * Renders a centered raised card with title, message, and confirm/dismiss
- * actions. Content can be fully overridden via [content] (shown after
- * title/message).
+ * Modal dialog / alert. Renders a centered raised card with title, message, and
+ * confirm/dismiss actions. Content can be fully overridden via [content] (shown
+ * after the message) and actions via [onConfirm]/[onDismissConfirm].
  */
 @Composable
 fun CanvasDialog(

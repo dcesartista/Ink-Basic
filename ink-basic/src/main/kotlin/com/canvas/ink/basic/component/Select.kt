@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.Dp
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Single-select dropdown. . Displays the current
- * selection in an outlined field; tapping expands the option list.
+ * Single-select dropdown. Displays the current selection in an outlined field;
+ * tapping expands the option list.
  */
 @Composable
 fun <T> CanvasSelect(

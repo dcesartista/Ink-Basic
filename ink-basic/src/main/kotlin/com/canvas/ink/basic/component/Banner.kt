@@ -18,12 +18,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
-/** Banner tone —  variants. */
+/** Banner tone — mapped to a state color accent. */
 enum class CanvasBannerTone { Info, Success, Warning, Error }
 
 /**
- * Inline informational banner.  (4 variants).
- * Uses the corresponding state color as a tinted accent on a raised surface.
+ * Inline informational banner (4 variants). Uses the corresponding state color
+ * as a tinted accent on a raised surface.
  */
 @Composable
 fun CanvasBanner(

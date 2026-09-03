@@ -18,17 +18,16 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
-/** A single guide-tour step.  steps. */
+/** A single guide-tour step. */
 data class CanvasGuideStep(
     val title: String,
     val message: String,
 )
 
 /**
- * A sequential walkthrough rendered one step at a time. Mirrors 
- * . Build it with a factory that manages [currentStep] and
- * [dismiss] state in the host; [current]/[total] drive the step counter. The
- * step card reuses [CanvasCoachmark]-style layout with prev/next/skip actions.
+ * A sequential walkthrough rendered one step at a time. [steps] holds the
+ * ordered content; [currentStep] drives the counter and prev/next flow, with
+ * [onStepChange] and [onDismiss] handled in the host.
  */
 @Composable
 fun CanvasGuideTour(

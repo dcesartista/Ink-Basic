@@ -59,7 +59,7 @@ fun ComponentsGallery() {
 
     GallerySection("Containers") {
         CanvasCard {
-            CanvasListItem(title = "Design tokens", supportingText = "Reconciled against the reference library")
+            CanvasListItem(title = "Design tokens", supportingText = "Reconciled against the original library")
             CanvasListItem(title = "Components", supportingText = "Port complete")
         }
         CanvasEmptyState(title = "No results", supportingText = "Try adjusting your search", icon = Icons.Default.Search)

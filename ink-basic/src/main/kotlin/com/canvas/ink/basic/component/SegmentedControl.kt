@@ -12,9 +12,8 @@ import androidx.compose.ui.text.font.FontWeight
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Single-select segmented control. .
- * `SingleChoiceSegmentedButtonRow` handles the contiguous framing; each segment
- * is a [SegmentedButton].
+ * Single-select segmented control. `SingleChoiceSegmentedButtonRow` handles the
+ * contiguous framing; each segment is a [SegmentedButton].
  */
 @Composable
 fun CanvasSegmentedControl(

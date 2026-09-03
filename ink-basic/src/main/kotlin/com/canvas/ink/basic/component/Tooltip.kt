@@ -12,10 +12,10 @@ import androidx.compose.ui.text.style.TextAlign
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Single-line helper bubble. .
- * Renders an inverted-surface capsule with explanatory text. Content overrides
- * color via the token pair (textInverse on bgSurfaceRaised would lack contrast
- * in dark mode, so we use a solid accent-backed surface here by default).
+ * Single-line helper bubble. Renders an inverted-surface capsule with
+ * explanatory text. Content overrides color via the token pair (textInverse on
+ * bgSurfaceRaised would lack contrast in dark mode, so we use a solid
+ * accent-backed surface here by default).
  */
 @Composable
 fun CanvasTooltip(

@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Filled text input on the alt surface. 
- * filled variant. Companion to the outlined [CanvasTextField].
+ * Filled text input on the alt surface. Companion to the outlined
+ * [CanvasTextField].
  */
 @Composable
 fun CanvasTextFieldFilled(

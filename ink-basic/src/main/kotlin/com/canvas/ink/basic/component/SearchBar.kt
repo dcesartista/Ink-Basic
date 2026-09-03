@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Search input. . Pill-shaped, alt-surface
- * container; the search icon should be passed via [leadingIcon].
+ * Search input. Pill-shaped, alt-surface container; the search icon should be
+ * passed via [leadingIcon].
  */
 @Composable
 fun CanvasSearchBar(

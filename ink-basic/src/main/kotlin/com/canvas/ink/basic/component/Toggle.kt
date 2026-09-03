@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * On/off switch control. . Optional [label] is
- * rendered to the side (so a screen can pair it without a custom layout).
+ * On/off switch control. Optional [label] is rendered to the side (so a screen
+ * can pair it without a custom layout).
  */
 @Composable
 fun CanvasToggle(

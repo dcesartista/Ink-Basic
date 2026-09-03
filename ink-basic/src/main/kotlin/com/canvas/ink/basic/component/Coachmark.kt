@@ -19,10 +19,9 @@ import androidx.compose.ui.window.DialogProperties
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * A spotlight-style informational callout. .
- * Renders a raised card overlay (host positions it over the target region) with
- * title, message, and a next/dismiss action. Step text helps orient multi-step
- * flows.
+ * A spotlight-style informational callout. Renders a raised card overlay (host
+ * positions it over the target region) with title, message, and a next/dismiss
+ * action. Step text helps orient multi-step flows.
  */
 @Composable
 fun CanvasCoachmark(

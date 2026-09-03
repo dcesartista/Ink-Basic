@@ -23,9 +23,9 @@ import androidx.compose.ui.text.style.TextAlign
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Numbered step progress indicator. . Each step
- * renders a circle (completed = accent fill with check, current = accent ring,
- * upcoming = alt surface); a connector line joins consecutive steps.
+ * Numbered step progress indicator. Each step renders a circle (completed =
+ * accent fill with check, current = accent ring, upcoming = alt surface); a
+ * connector line joins consecutive steps.
  */
 @Composable
 fun CanvasStepper(

@@ -12,8 +12,8 @@ import androidx.compose.ui.text.font.FontWeight
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Floating action button. .
- * Icon-only via [icon]; extended (icon + label) via [icon] and [label].
+ * Floating action button. Icon-only via [icon]; extended (icon + label) via
+ * [icon] and [label].
  */
 @Composable
 fun CanvasFAB(

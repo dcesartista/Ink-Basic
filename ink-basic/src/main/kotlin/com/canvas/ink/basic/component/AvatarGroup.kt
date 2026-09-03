@@ -16,10 +16,9 @@ import androidx.compose.ui.unit.dp
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Overlapping stack of avatars. .
- * Renders up to [max] avatars, each overlapping the previous by ~1/3 of its
- * width, then a "+N" overflow badge. Feed painters via [images] (full-bleed
- * image avatars) or initials via [initials] (colored text avatars).
+ * Overlapping stack of avatars. Renders up to [max] avatars, each overlapping
+ * the previous by ~1/3 of its width, then a "+N" overflow badge. Feed painters
+ * via [images] or initials via [initials].
  */
 @Composable
 fun CanvasAvatarGroup(

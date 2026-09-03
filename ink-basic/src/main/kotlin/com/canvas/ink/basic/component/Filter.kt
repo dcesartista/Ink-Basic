@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Horizontal, horizontally-scrollable row of filter chips. Mirrors 
- * . Single or multi select is expressed entirely by the caller's
- * [selected]/[onToggle] contract — this component just renders each option as a
- * chip that toggles to the filled accent style when selected.
+ * Horizontal, horizontally-scrollable row of filter chips. Single or multi
+ * select is expressed entirely by the caller's [selected]/[onToggle] contract —
+ * this component just renders each option as a
+ * selectable chip.
  */
 @Composable
 fun <T> CanvasFilter(

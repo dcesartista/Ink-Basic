@@ -25,9 +25,8 @@ import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
  * Time picker dialog wrapping the M3 clock, token-wired through the
- * CanvasTheme T2 bridge. . [initialHour]/
- * [initialMinute] set the starting time (24h values); selection reported via
- * [onTimeSelected].
+ * CanvasTheme T2 bridge. [initialHour]/[initialMinute] set the starting time
+ * (24h values); selection reported via [onTimeSelected].
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

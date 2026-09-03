@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
-/** Timeline entry.  nodes. */
+/** Timeline entry. */
 data class CanvasTimelineItem(
     val title: String,
     val supportingText: String? = null,
@@ -29,9 +29,9 @@ data class CanvasTimelineItem(
 )
 
 /**
- * Vertical event timeline. . Each [items]
- * entry renders a node (accent-filled with optional icon) joined by a connector
- * line, with title + optional supporting text/timestamp.
+ * Vertical event timeline. Each [items] entry renders a node (accent-filled
+ * with optional icon) joined by a connector line, with title + optional
+ * supporting text/timestamp.
  */
 @Composable
 fun CanvasTimeline(

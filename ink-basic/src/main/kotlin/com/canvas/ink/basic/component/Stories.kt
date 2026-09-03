@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
-/** A story entry.  items. */
+/** A story entry. */
 data class CanvasStory(
     val label: String,
     val image: Painter? = null,
@@ -33,8 +33,8 @@ data class CanvasStory(
 )
 
 /**
- * Horizontal row of story avatars with a seen/unseen progress ring, tap-to-open
- * semantics. .
+ * Horizontal row of story avatars with a seen/unseen progress ring and
+ * tap-to-open semantics.
  */
 @Composable
 fun CanvasStories(

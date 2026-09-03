@@ -14,9 +14,8 @@ import androidx.compose.ui.Modifier
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * Modal bottom sheet handler. . Renders the
- * sheet when [visible] is true; dismiss on swipe/scrim. The [sheetState] is
- * hoistable but a remembered default is provided for common use.
+ * Modal bottom sheet handler. Renders the sheet when [visible] is true; dismiss
+ * on swipe/scrim. A remembered sheet state is provided for common use.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
