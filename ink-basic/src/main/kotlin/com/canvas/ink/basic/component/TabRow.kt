@@ -2,6 +2,7 @@ package com.canvas.ink.basic.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -27,7 +28,11 @@ fun CanvasTabRow(
     modifier: Modifier = Modifier,
 ) {
     val t = LocalSemanticTokens.current
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(t.color.bgSurface),
+    ) {
         Row(modifier = Modifier.fillMaxWidth()) {
             tabs.forEachIndexed { index, title ->
                 val selected = index == selectedIndex

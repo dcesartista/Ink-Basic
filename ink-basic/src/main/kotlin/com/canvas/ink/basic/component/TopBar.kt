@@ -1,5 +1,6 @@
 package com.canvas.ink.basic.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +32,7 @@ fun CanvasTopBar(
         modifier = modifier
             .fillMaxWidth()
             .height(t.sizing.appBarHeight)
+            .background(t.color.bgSurface)
             .padding(horizontal = t.space.layout.page),
         verticalAlignment = Alignment.CenterVertically,
     ) {

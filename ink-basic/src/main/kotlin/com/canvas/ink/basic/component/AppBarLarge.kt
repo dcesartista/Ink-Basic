@@ -1,6 +1,7 @@
 package com.canvas.ink.basic.component
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -29,7 +30,11 @@ fun CanvasAppBarLarge(
     actions: @Composable RowScope.() -> Unit = {},
 ) {
     val t = LocalSemanticTokens.current
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(t.color.bgSurface),
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()

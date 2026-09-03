@@ -35,4 +35,6 @@ data class SizingTokens(
     val iconSizeSm: Dp = 16.dp,
     val iconSizeLg: Dp = 32.dp,
     val progressThickness: Dp = 4.dp,
+    /** Leading media in a compact collection row (ADR-0003 Collection, RowCompact density). */
+    val rowMedia: Dp = 88.dp,
 )

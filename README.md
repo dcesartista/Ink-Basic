@@ -43,6 +43,9 @@ T3 semantic tokens via `LocalSemanticTokens`.
 ink-basic/src/main/kotlin/com/canvas/ink/basic/
 ├── token/       T3 semantic token definitions (Color, Type, Space, Radius,
 │                Elevation, Motion, Sizing, Border) + SemanticTokens aggregate
+├── layout/      Screen structure (Palette ADR-0003): ScreenState phases,
+│                CanvasStateHost, CanvasScreenScaffold, CanvasSection,
+│                CanvasListBody, CanvasFormBody
 ├── palette/     Palette (light/dark/highContrast), DefaultPalette,
 │                CanvasTheme (LocalSemanticTokens + M3 bridge + typography)
 └── component/   T3 tokens only — CanvasButton, CanvasButtonSecondary,
@@ -73,6 +76,30 @@ CanvasTheme {           // or CanvasTheme(palette = myPalette)
     CanvasCard { CanvasEmptyState("No items") }
 }
 ```
+
+## Screen structure (ADR-0003)
+
+Components alone do not make screens consistent. `layout/` supplies the frame and the phase
+host so every screen gets the same regions, page inset and loading/empty/error handling
+without writing them:
+
+```kotlin
+CanvasScreenScaffold(
+    topBar = { CanvasTopBar(title = "Products") },
+) { padding ->
+    CanvasStateHost(state = state, onRetry = onRefresh) { products ->
+        CanvasListBody(
+            items = products,
+            key = { it.id },          // required — an unkeyed list is a perf defect
+            contentPadding = padding,
+        ) { ProductRow(it) }
+    }
+}
+```
+
+`ScreenState` is a sum type — `Loading` · `Empty(reason)` · `Error(message)` · `Content(value)`
+— so "loading and error at once" cannot be represented. Map your UI state onto it in the
+state holder; the screen never decides a phase.
 
 ## Component contract
 Components are immutable toward tokens — they read what `LocalSemanticTokens`
