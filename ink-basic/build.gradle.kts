@@ -29,6 +29,12 @@ kotlin {
     }
 }
 
+// In-build identity matching the published Central coordinate, so a consumer
+// can includeBuild() this checkout and substitute(module("com.cesartista.canvas:ink-basic"))
+// against source (local dev) without changing its dependency line.
+group = "com.cesartista.canvas"
+version = "0.1.0"
+
 dependencies {
     // `api` for everything this library exposes in its public signatures —
     // Modifier, Color, Dp, TextStyle, Easing — so consumers get them on their
