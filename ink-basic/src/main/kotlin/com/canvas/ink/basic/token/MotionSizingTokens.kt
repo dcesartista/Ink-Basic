@@ -32,5 +32,7 @@ data class SizingTokens(
     val touchTarget: Dp = 48.dp,
     val appBarHeight: Dp = 64.dp,
     val iconSize: Dp = 24.dp,
+    val iconSizeSm: Dp = 16.dp,
+    val iconSizeLg: Dp = 32.dp,
     val progressThickness: Dp = 4.dp,
 )

@@ -18,4 +18,5 @@ data class SemanticTokens(
     val elevation: ElevationTokens,
     val motion: MotionTokens,
     val sizing: SizingTokens,
+    val border: BorderTokens = BorderTokens(),
 )
