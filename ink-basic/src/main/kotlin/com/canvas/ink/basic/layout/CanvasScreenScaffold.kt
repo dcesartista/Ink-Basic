@@ -11,19 +11,54 @@ import androidx.compose.ui.unit.dp
 import com.canvas.ink.basic.palette.LocalSemanticTokens
 
 /**
- * The page frame every Canvas screen sits in.
+ * The original page frame. **Superseded by [CanvasPageShell] — prefer the shells for new work.**
  *
- * Owns the three decisions that were being made independently — and inconsistently — by
- * every screen: where the top region goes, where a pinned bottom region goes, and how much
- * horizontal page padding the body gets. Page padding resolves to `space.layout.page`,
- * the token defined for it in ADR-0001 and which no hand-rolled screen was using.
+ * ## Why two of these exist
+ *
+ * This came first, when Palette ADR-0003 recognised only regions and phases. It owns the
+ * three decisions every screen was otherwise making independently and inconsistently: where
+ * the top region goes, where a pinned bottom region goes, and how much horizontal page
+ * padding the body gets — resolved to `space.layout.page`, the token ADR-0001 defines for
+ * exactly that and which no hand-rolled screen was using.
+ *
+ * ADR-0003 was then rewritten against external design references and gained the **shell**
+ * concept: a screen's frame is one of three contracts, not one, and the choice is orthogonal
+ * to its archetype.
+ *
+ * | Shell | Chrome | Bottom |
+ * |---|---|---|
+ * | [CanvasPageShell] | branded top bar | footer **or** tab bar |
+ * | [CanvasOverlayShell] | dismiss affordance | optional pinned action, never a footer |
+ * | [CanvasFocusedShell] | none | optional pinned action |
+ *
+ * [CanvasPageShell] is a near-drop-in replacement for this function — same slots, same
+ * padding contract, same underlying frame — and additionally declares a [NavigationModel],
+ * which this function cannot. That declaration matters: drawer versus bottom tabs is a
+ * different navigation graph, not a different rendering, so it must be stated rather than
+ * assumed.
+ *
+ * ## Why it has not simply been deleted
+ *
+ * It is public API in a published artifact and has existing callers. Removing it is a
+ * breaking change and belongs in a deliberate deprecation cycle, not a drive-by edit.
+ *
+ * ## Intended resolution
+ *
+ * 1. Migrate remaining callers to [CanvasPageShell].
+ * 2. Mark this `@Deprecated(ReplaceWith("CanvasPageShell(...)"))` for one minor version.
+ * 3. Remove it in the following minor.
+ *
+ * Until step 1 is done, **this is not a second way of doing things you may pick between** —
+ * it is a migration in progress. New screens use the shells.
  *
  * The [content] lambda receives the padding it must apply. A scrolling body should pass it
  * to the scroll container's `contentPadding` rather than to an outer `Modifier.padding`,
- * so content scrolls under the bars instead of being clipped by them.
+ * so content scrolls under the bars instead of being clipped by them — which is only correct
+ * because the bars paint an opaque surface.
  *
  * @param pagePadding horizontal inset for the body. Pass `0.dp` for edge-to-edge bodies
  *   (a full-bleed media header, a list whose rows draw their own inset).
+ * @see CanvasPageShell
  */
 @Composable
 fun CanvasScreenScaffold(
