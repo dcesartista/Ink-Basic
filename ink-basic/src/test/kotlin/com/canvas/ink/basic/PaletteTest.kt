@@ -91,11 +91,35 @@ class PaletteTest {
         }
     }
 
-    /** Outlines bound interactive components (TextField, outlined Button). */
+    /** Outline contrast: bounds interactive controls (3:1). */
     @Test
     fun outlineMeetsNonTextContrast() {
         modes.forEach { (mode, t) ->
             assertContrast("$mode: outline on bgSurface", t.color.outline, t.color.bgSurface, nonTextMinimum)
+        }
+    }
+
+    /**
+     * Spacing scale kept on the 8-point grid (8-point grid
+     * plus the extended sub-steps absorbed from that scale). Locks the exact
+     * contract values so a later palette cannot silently drift them.
+     */
+    @Test
+    fun spacingMatchesReconciledPixelScale() {
+        modes.forEach { (mode, t) ->
+            val s = t.space
+            assertEquals("$mode: xxxs", 2.dp, s.xxxs)
+            assertEquals("$mode: xxs", 4.dp, s.xxs)
+            assertEquals("$mode: xxs2 ", 6.dp, s.xxs2)
+            assertEquals("$mode: xs", 8.dp, s.xs)
+            assertEquals("$mode: sm", 12.dp, s.sm)
+            assertEquals("$mode: md", 16.dp, s.md)
+            assertEquals("$mode: sm2 ", 20.dp, s.sm2)
+            assertEquals("$mode: lg", 24.dp, s.lg)
+            assertEquals("$mode: xl", 32.dp, s.xl)
+            assertEquals("$mode: xxxl ", 40.dp, s.xxxl)
+            assertEquals("$mode: xxl", 48.dp, s.xxl)
+            assertEquals("$mode: xxxxl ", 80.dp, s.xxxxl)
         }
     }
 
@@ -145,11 +169,24 @@ class PaletteTest {
             assertTrue("$mode space", t.space.md <= t.space.lg)
             assertTrue("$mode space", t.space.lg <= t.space.xl)
             assertTrue("$mode space", t.space.xl <= t.space.xxl)
+            // Extended reconciled sub-steps keep the scale strict:
+            // 2 <= 4 <= 6 <= 8 and 20 <= 24 <= 32 <= 40 <= 48 <= 80.
+            assertTrue("$mode space", t.space.xxxs <= t.space.xxs)
+            assertTrue("$mode space", t.space.xxs <= t.space.xxs2)
+            assertTrue("$mode space", t.space.xxs2 <= t.space.xs)
+            assertTrue("$mode space", t.space.sm <= t.space.sm2)
+            assertTrue("$mode space", t.space.sm2 <= t.space.lg)
+            assertTrue("$mode space", t.space.xl <= t.space.xxxl)
+            assertTrue("$mode space", t.space.xxxl <= t.space.xxl)
+            assertTrue("$mode space", t.space.xxl <= t.space.xxxxl)
             assertTrue("$mode type", t.type.caption.size.value <= t.type.body.size.value)
             assertTrue("$mode type", t.type.body.size.value <= t.type.h1.size.value)
             assertTrue("$mode type", t.type.h1.size.value <= t.type.display.size.value)
             assertTrue("$mode motion", t.motion.durationFast <= t.motion.durationNormal)
             assertTrue("$mode motion", t.motion.durationNormal <= t.motion.durationSlow)
+            // Border strokes: thin <= medium <= thick.
+            assertTrue("$mode border", t.border.thin <= t.border.medium)
+            assertTrue("$mode border", t.border.medium <= t.border.thick)
             // 48dp minimum touch target is core-pinned, not themeable (QUALITY-BAR §5).
             assertTrue("$mode touchTarget", t.sizing.touchTarget >= 48.dp)
         }
