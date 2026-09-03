@@ -62,7 +62,10 @@ dependencies {
 }
 
 mavenPublishing {
-    coordinates("com.cesartista.canvas", "ink-basic", "0.1.0")
+    // Version comes from the `version` property above — never a second literal.
+    // A hardcoded version here silently overrides it, so a bump appears to work
+    // while every publish keeps writing the old coordinate.
+    coordinates(group.toString(), "ink-basic", version.toString())
     publishToMavenCentral(
         automaticRelease = providers.gradleProperty("mavenCentralAutomaticPublishing")
             .orElse("false").get().toBoolean(),
