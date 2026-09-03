@@ -42,7 +42,7 @@ kotlin {
 // can includeBuild() this checkout and substitute(module("com.cesartista.canvas:ink-basic"))
 // against source (local dev) without changing its dependency line.
 group = "com.cesartista.canvas"
-version = "0.2.0-dev03"
+version = "0.2.0-dev04"
 
 dependencies {
     // `api` for everything this library exposes in its public signatures —

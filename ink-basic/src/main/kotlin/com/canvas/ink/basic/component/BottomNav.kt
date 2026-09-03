@@ -2,6 +2,7 @@ package com.canvas.ink.basic.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,6 +37,7 @@ fun CanvasBottomNav(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .background(t.color.bgSurface)
             .navigationBarsPadding()
             .padding(horizontal = t.space.layout.page, vertical = t.space.xs),
         verticalAlignment = Alignment.CenterVertically,
