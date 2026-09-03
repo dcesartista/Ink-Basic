@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ink-basic"
 include(":ink-basic")
+include(":sample")
