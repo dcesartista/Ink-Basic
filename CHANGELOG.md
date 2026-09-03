@@ -34,6 +34,14 @@ This project follows [Semantic Versioning](https://semver.org/).
   owns how large and what shape.
 - `SizingTokens.rowMedia` — leading media in a compact collection row.
 
+### Deprecated (documentation only, no API change yet)
+- **`CanvasScreenScaffold` is superseded by `CanvasPageShell`.** It predates the shell concept
+  introduced when ADR-0003 was rewritten against external references, and cannot declare a
+  `NavigationModel`. Both now carry cross-referencing KDoc explaining why two exist, that they
+  are a migration in progress rather than alternatives, and the three-step removal planned
+  (migrate callers → `@Deprecated` for one minor → remove the next). Recorded rather than
+  acted on because it is published API with existing callers.
+
 ### Changed
 - Publishing version is now single-sourced from the module's `version` property.
   `mavenPublishing { coordinates(...) }` previously hardcoded `"0.1.0"`, silently overriding

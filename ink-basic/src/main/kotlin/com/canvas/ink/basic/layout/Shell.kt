@@ -44,6 +44,12 @@ val InkBasicPageNavigationModel: NavigationModel = NavigationModel.Tabs
  * container's `contentPadding` rather than an outer `Modifier.padding`, so content scrolls
  * under the chrome instead of being clipped by it — which is only correct because the bars
  * paint an opaque surface.
+ *
+ * Supersedes [CanvasScreenScaffold], which predates the shell concept and cannot declare a
+ * [NavigationModel]. The two are not alternatives to choose between — see that function's
+ * documentation for the migration in progress.
+ *
+ * @see CanvasScreenScaffold
  */
 @Composable
 fun CanvasPageShell(
