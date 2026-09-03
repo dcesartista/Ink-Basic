@@ -23,10 +23,27 @@ This project follows [Semantic Versioning](https://semver.org/).
     unkeyed list cannot be written by accident.
   - `CanvasFormBody` — scrolling field column that applies the keyboard inset.
 
+- **Three shells** (Palette ADR-0003): `CanvasPageShell`, `CanvasOverlayShell`,
+  `CanvasFocusedShell`, cut from one frame. `NavigationModel` makes drawer-vs-tabs an
+  explicit declaration rather than an ink's silent choice, because it changes the app's
+  navigation graph, not just its rendering.
+- **`CanvasCollection`** — the first slot-driven archetype. The app supplies
+  `CollectionItemSlots` (values, not widgets) and an optional media lambda; the ink decides
+  typography, arrangement, and media geometry. Two densities ship: `Grid2` and `RowCompact`.
+  The media lambda receives **the ink's modifier**, so the app owns which image and the ink
+  owns how large and what shape.
+- `SizingTokens.rowMedia` — leading media in a compact collection row.
+
 ### Changed
 - Publishing version is now single-sourced from the module's `version` property.
   `mavenPublishing { coordinates(...) }` previously hardcoded `"0.1.0"`, silently overriding
   any bump — every publish wrote the old coordinate while appearing to succeed.
+
+### Sample
+- `CollectionArchetypeProof` renders two unrelated commercial UI kits — Open Fashion's
+  editorial catalogue and Stylish's marketplace listing — from **one `CanvasCollection`
+  call**, differing only in density and which optional slots are supplied. Verified on
+  device, not just compiled.
 
 ### Testing
 - Compose behaviour is now verified on the JVM via **Robolectric** rather than on a device,
